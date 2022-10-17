@@ -6,6 +6,9 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript",
         "plugin:@typescript-eslint/recommended",
         "prettier"
     ],
@@ -20,16 +23,12 @@
     },
     "plugins": [
         "react",
-        "plugin:import/errors",
-        "plugin:import/warnings",
-        "plugin:import/typescript",
+        "@typescript-eslint",
         "prettier"
     ],
     "rules": {
-        "prettier/prettier": "error",
         "no-debugger": 0,
         "semi": "error",
-        "prefer-destructuring": "error",
         "max-len": [
             "warn",
             {
@@ -40,7 +39,6 @@
         ],
         "no-unused-vars": "warn",
         "operator-linebreak": "warn",
-        "react-hooks/rules-of-hooks": "error",
         "import/extensions": [
             "error",
             "ignorePackages",
@@ -82,7 +80,7 @@
         "import/resolver": {
             "node": {
                 "paths": ["src"],
-                "extensions": [".js", ".jsx", ".ts", ".tsx"]
+                "extensions": [".ts", ".tsx"]
             }
         }
     }
