@@ -1,4 +1,4 @@
-import { Meetup } from '../MeetupItem/types';
+import { Meetup } from 'types/meetyps';
 
 export type GroupMeetupsByDateProps = {
   day: string;

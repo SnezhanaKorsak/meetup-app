@@ -1,6 +1,6 @@
 import React from 'react';
 
-import GroupMeetupsByDate from '../GroupMeetupsByData';
+import GroupMeetupsByDate from '../GroupMeetupsByDate';
 import { getWeekArr } from 'helpers';
 
 import { MeetupsContainerProps } from './types';
