@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import imgPath from 'assets/images/nophoto-products.jpeg';
+import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.div`
+  position: relative;
   width: 100%;
   height: ${({ theme }) => theme.spaces[10]}px;
   display: flex;
   flex-direction: row;
-  padding: ${({ theme }) => theme.spaces[2]}px 0;
   margin-bottom: ${({ theme }) => theme.spaces[6]}px;
 `;
 
@@ -61,4 +62,25 @@ export const Place = styled.div`
   line-height: ${({ theme }) => theme.spaces[4]}px;
   color: ${({ theme }) => theme.colors.pink};
   font-weight: 600;
+`;
+
+export const HiddenButton = styled.button<{ hidden: boolean }>`
+  display: ${({ hidden }) => (hidden ? 'none' : 'block')};
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: ${({ theme }) => theme.spaces[1]}px;
+  background-color: ${({ theme }) => theme.colors.lightGray};
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+`;
+
+export const NavLink = styled(Link)<{ isActive?: boolean }>`
+  text-decoration: none;
+  font-size: ${({ theme }) => theme.fontSizes[7]}px;
+  color: ${({ theme }) => theme.colors.white};
 `;

@@ -7,7 +7,7 @@ export const StyledNavigation = styled.div`
   justify-content: space-between;
 `;
 
-export const NavLink = styled(Link)<{ isActive: boolean }>`
+export const NavLink = styled(Link)<{ isActive?: boolean }>`
   border-bottom: 2px solid;
   border-color: ${({ isActive, theme }) => (isActive ? theme.colors.accent : 'transparent')};
   text-decoration: none;

@@ -36,9 +36,3 @@ export const getAllMeetups = (filter: string, sortQuery: string) => (dispatch: A
       console.log(err.message);
     });
 };
-
-export const addMeetup = (newMeetup: Omit<Meetup, 'id' | 'user_id'>) => () => {
-  meetupService.createMeetup(newMeetup).catch((err: AxiosError) => {
-    console.log(err.message);
-  });
-};

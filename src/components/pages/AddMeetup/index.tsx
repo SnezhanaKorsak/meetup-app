@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
+import { Navigate } from 'react-router-dom';
 
 import Calendar from 'components/Calendar';
 import Greeting from 'components/Greeting';
 
 import { AddMeetupSchema } from 'common/validation';
 import { getDateWithTime } from 'helpers/index';
-import { useAppDispatch } from 'hooks/index';
 import { HOME_PAGE_ROUTE } from 'constants/index';
+import { meetupService } from 'api/meetup-api';
 
 import { Wrapper } from 'components/layouts';
 import { Container, ErrorMessage, Label, StyledField, SubmitButton } from './styled';
 import { MeetupsFormValues } from './types';
-import { addMeetup } from '../../../state/reducers/meetupReducer';
-import { Navigate } from 'react-router-dom';
 
 const AddMeetup = () => {
-  const dispatch = useAppDispatch();
   const [date, setDate] = useState<Date | null>(new Date());
 
   const initialValues: MeetupsFormValues = {
@@ -27,9 +25,9 @@ const AddMeetup = () => {
     image: '',
   };
 
-  const onSubmitHandler = (values: MeetupsFormValues) => {
+  const onSubmitHandler = async (values: MeetupsFormValues) => {
     const time = getDateWithTime(values.time, date);
-    dispatch(addMeetup({ ...values, time }));
+    await meetupService.createMeetup({ ...values, time });
   };
 
   return (

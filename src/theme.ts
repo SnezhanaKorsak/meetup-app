@@ -1,15 +1,10 @@
 const font = 'Pacifico, cursive';
 
 // Color palette
-const black = '#121212';
 const white = '#ffffff';
 const pink = '#ee1c41';
-const light = 'rgba(255,255,255,0.9)';
-const steelBlue = '#b3c7de';
-const darkBlue = '#759ac6';
-const lightGray = '#e8e8e8';
 const gray = '#757575';
-const aquamarine = '#64ffda';
+const lightGray = 'rgba(117,117,117,0.8)';
 
 const error = '#ef0505';
 
@@ -27,6 +22,7 @@ export default {
     white,
     pink,
     gray,
+    lightGray,
     error,
   },
   font,
