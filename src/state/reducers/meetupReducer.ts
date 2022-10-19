@@ -26,9 +26,9 @@ export const meetupReducer = meetupSlice.reducer;
 export const { setMeetups } = meetupSlice.actions;
 
 // thunk
-export const getAllMeetups = () => (dispatch: AppDispatch) => {
+export const getAllMeetups = (filter: string, sortQuery: string) => (dispatch: AppDispatch) => {
   meetupService
-    .fetchAllMeetups()
+    .fetchAllMeetups(filter, sortQuery)
     .then((res) => {
       dispatch(setMeetups(res.data));
     })
@@ -37,13 +37,8 @@ export const getAllMeetups = () => (dispatch: AppDispatch) => {
     });
 };
 
-export const addMeetup = (newMeetup: Omit<Meetup, 'id' | 'user_id'>) => (dispatch: AppDispatch) => {
-  meetupService
-    .createMeetup(newMeetup)
-    .then(() => {
-      dispatch(getAllMeetups());
-    })
-    .catch((err: AxiosError) => {
-      console.log(err.message);
-    });
+export const addMeetup = (newMeetup: Omit<Meetup, 'id' | 'user_id'>) => () => {
+  meetupService.createMeetup(newMeetup).catch((err: AxiosError) => {
+    console.log(err.message);
+  });
 };

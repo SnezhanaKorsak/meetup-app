@@ -1,15 +1,21 @@
 import React from 'react';
 
-import Filter from '../Filter';
-import Sorting from '../Sorting';
+import Filter from 'components/Filter';
+import Sorting from 'components/Sorting';
 
 import { CategoriesContainer } from './styled';
+import { CategoriesProps } from './types';
 
-const Categories = () => {
+const Categories: React.FC<CategoriesProps> = ({
+  sortType,
+  filterType,
+  setSortType,
+  setFilterType,
+}) => {
   return (
     <CategoriesContainer>
-      <Filter />
-      <Sorting />
+      <Filter filterType={filterType} setFilterType={setFilterType} />
+      <Sorting sortType={sortType} setSortType={setSortType} />
     </CategoriesContainer>
   );
 };

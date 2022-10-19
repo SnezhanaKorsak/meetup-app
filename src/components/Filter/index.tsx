@@ -3,20 +3,20 @@ import React, { ChangeEvent, useState } from 'react';
 import Toggle from 'common/Toggle';
 
 import { FilterButton, Select, SelectedFilter } from './styled';
+import { FilterProps } from './types';
 
-const Filter = () => {
-  const [filterValue, setFilterValue] = useState('Any type');
+const Filter: React.FC<FilterProps> = ({ filterType, setFilterType }) => {
   const [isToggle, setIsToggle] = useState(false);
 
   const selectChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-    setFilterValue(event.currentTarget.value);
+    setFilterType(event.currentTarget.value);
     setIsToggle(false);
   };
 
   return (
     <SelectedFilter>
       <FilterButton>
-        {filterValue}
+        {filterType}
         <Toggle isToggle={isToggle} setIsToggle={setIsToggle} />
       </FilterButton>
       {isToggle && (
@@ -24,7 +24,6 @@ const Filter = () => {
           <option>Please Select...</option>
           <option>Any type</option>
           <option>Online</option>
-          <option>Personally</option>
         </Select>
       )}
     </SelectedFilter>

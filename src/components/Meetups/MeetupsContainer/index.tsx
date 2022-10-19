@@ -1,21 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { getAllMeetups } from 'state/reducers/meetupReducer';
 import { getWeekArr } from 'helpers/index';
-import { useAppDispatch, useAppSelector } from 'hooks/index';
 
 import GroupMeetupsByDate from '../GroupMeetupsByDate';
 
 import { MeetupsContainerProps } from './types';
 
-const MeetupsContainer: React.FC<MeetupsContainerProps> = ({ date }) => {
-  const dispatch = useAppDispatch();
-  const meetups = useAppSelector((state) => state.meetups.meetups);
-
-  useEffect(() => {
-    dispatch(getAllMeetups());
-  }, []);
-
+const MeetupsContainer: React.FC<MeetupsContainerProps> = ({ date, meetups }) => {
   const currentDate = new Date(date || '');
   const week = getWeekArr(currentDate);
 

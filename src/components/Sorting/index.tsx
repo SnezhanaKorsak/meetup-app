@@ -3,21 +3,20 @@ import React, { ChangeEvent, useState } from 'react';
 import Toggle from 'common/Toggle';
 
 import { SortButton, Select, SelectedSort } from './styled';
+import { SortingProps } from './types';
 
-const Sorting = () => {
-  const [filterValue, setFilterValue] = useState('No sorting');
+const Sorting: React.FC<SortingProps> = ({ sortType, setSortType }) => {
   const [isToggle, setIsToggle] = useState(false);
 
   const selectChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-    console.log(event.currentTarget.value);
-    setFilterValue(event.currentTarget.value);
+    setSortType(event.currentTarget.value);
     setIsToggle(false);
   };
 
   return (
     <SelectedSort>
       <SortButton>
-        {filterValue}
+        {sortType}
         <Toggle isToggle={isToggle} setIsToggle={setIsToggle} />
       </SortButton>
       {isToggle && (
@@ -25,8 +24,8 @@ const Sorting = () => {
           <option>Please Select...</option>
           <option>Title (ASC)</option>
           <option>Title (DESC)</option>
-          <option>Date (ASC)</option>
-          <option>Date (DESC)</option>
+          <option>Time (ASC)</option>
+          <option>Time (DESC)</option>
         </Select>
       )}
     </SelectedSort>
