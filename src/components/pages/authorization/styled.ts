@@ -34,3 +34,9 @@ export const RadioLabel = styled.label`
   font-size: ${({ theme }) => theme.fontSizes[3]}px;
   color: ${({ theme }) => theme.colors.gray};
 `;
+
+export const Link = styled.div`
+  margin-top: ${({ theme }) => theme.spaces[2]}px;
+  font-size: ${({ theme }) => theme.fontSizes[3]}px;
+  text-align: center;
+`;

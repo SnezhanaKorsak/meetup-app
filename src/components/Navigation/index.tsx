@@ -1,25 +1,28 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
+import { useAppSelector } from 'hooks/index';
+
+import Logout from 'components/Logout';
+
+import { HOME_PAGE_ROUTE, ADD_MEETUP_ROUTE } from 'constants/index';
 import { NavLink, StyledNavigation } from 'components/Navigation/styled';
 
-import { HOME_PAGE_ROUTE, ADD_MEETUP_ROUTE, LOGIN_ROUTE } from 'constants/index';
-
 const Navigation = () => {
+  const isAuth = useAppSelector((state) => state.auth.isAuth);
   const location = useLocation();
   const path = location.pathname;
 
   return (
-    <StyledNavigation id='navigation'>
+    <StyledNavigation>
       <NavLink to={HOME_PAGE_ROUTE} isActive={path === HOME_PAGE_ROUTE}>
         Home
       </NavLink>
       <NavLink to={ADD_MEETUP_ROUTE} isActive={path === ADD_MEETUP_ROUTE}>
         Add event
       </NavLink>
-      <NavLink to={LOGIN_ROUTE} isActive={path === LOGIN_ROUTE}>
-        Log in
-      </NavLink>
+
+      {isAuth && <Logout />}
     </StyledNavigation>
   );
 };
