@@ -4,5 +4,10 @@ export type Meetup = {
   description: string;
   time: string;
   place: string;
+  image: string;
   user_id: string;
+};
+
+export type MeetupResponse = {
+  meetups: Meetup[];
 };

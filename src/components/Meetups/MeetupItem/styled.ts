@@ -7,12 +7,12 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   padding: ${({ theme }) => theme.spaces[2]}px 0;
-  margin-bottom: ${({ theme }) => theme.spaces[3]}px;
+  margin-bottom: ${({ theme }) => theme.spaces[6]}px;
 `;
 
 export const Container = styled.div`
   width: 100%;
-  height: 100%;
+  height: ${({ theme }) => theme.spaces[10]}px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -50,7 +50,6 @@ export const Description = styled.p`
   width: 100%;
   height: ${({ theme }) => theme.spaces[4]}px;
   font-size: ${({ theme }) => theme.fontSizes[2]}px;
-  line-height: ${({ theme }) => theme.spaces[4]}px;
   color: ${({ theme }) => theme.colors.gray};
 `;
 

@@ -7,7 +7,6 @@ export const AddMeetupSchema = Yup.object({
   description: Yup.string().max(100, 'Too Long!').required('The field is required'),
   place: Yup.string().max(100, 'Too Long!').required('The field is required'),
   time: Yup.string().required('The field is required'),
-  image: Yup.string().required('The field is required'),
 });
 
 export const LoginSchema = Yup.object({

@@ -5,12 +5,12 @@ import { formatTime } from 'helpers/';
 import { Wrapper, Container, Image, Time, Title, Description, Place } from './styled';
 import { Meetup } from 'types/meetyps';
 
-const MeetupItem: React.FC<Meetup> = ({ title, description, time, place }) => {
+const MeetupItem: React.FC<Meetup> = ({ title, description, time, place, image }) => {
   const formattedTime = formatTime(time);
 
   return (
     <Wrapper>
-      <Image img={''} />
+      <Image img={image} />
       <Container>
         <Time>{formattedTime}</Time>
         <Title>{title}</Title>

@@ -5,13 +5,20 @@ import Calendar from 'components/Calendar';
 import Greeting from 'components/Greeting';
 
 import { AddMeetupSchema } from 'common/validation';
-import { getDateWithTime } from 'helpers';
+import { getDateWithTime } from 'helpers/index';
+import { useAppDispatch } from 'hooks/index';
+import { HOME_PAGE_ROUTE } from 'constants/index';
 
 import { Wrapper } from 'components/layouts';
 import { Container, ErrorMessage, Label, StyledField, SubmitButton } from './styled';
 import { MeetupsFormValues } from './types';
+import { addMeetup } from '../../../state/reducers/meetupReducer';
+import { Navigate } from 'react-router-dom';
 
 const AddMeetup = () => {
+  const dispatch = useAppDispatch();
+  const [date, setDate] = useState<Date | null>(new Date());
+
   const initialValues: MeetupsFormValues = {
     title: '',
     description: '',
@@ -20,11 +27,9 @@ const AddMeetup = () => {
     image: '',
   };
 
-  const [date, setDate] = useState<Date | null>(new Date());
-
   const onSubmitHandler = (values: MeetupsFormValues) => {
     const time = getDateWithTime(values.time, date);
-    console.log({ ...values, time });
+    dispatch(addMeetup({ ...values, time }));
   };
 
   return (
@@ -38,7 +43,7 @@ const AddMeetup = () => {
             onSubmit={onSubmitHandler}
             validationSchema={AddMeetupSchema}
           >
-            {({ errors, touched, isValidating }) => (
+            {({ errors, touched, isValidating, isSubmitting }) => (
               <Form>
                 {errors.title && touched.title && <ErrorMessage>{errors.title}</ErrorMessage>}
                 <StyledField id='title' name='title' placeholder='Title' />
@@ -51,7 +56,6 @@ const AddMeetup = () => {
                 {errors.place && touched.place && <ErrorMessage>{errors.place}</ErrorMessage>}
                 <StyledField id='place' type='text' name='place' placeholder='Place' />
 
-                {errors.image && touched.image && <ErrorMessage>{errors.image}</ErrorMessage>}
                 <StyledField id='image' type='text' name='image' placeholder='Image URL' />
 
                 {errors.time && touched.time && <ErrorMessage>{errors.time}</ErrorMessage>}
@@ -61,6 +65,8 @@ const AddMeetup = () => {
                 <SubmitButton type='submit' disabled={isValidating}>
                   Submit
                 </SubmitButton>
+
+                {isSubmitting && <Navigate to={HOME_PAGE_ROUTE} />}
               </Form>
             )}
           </Formik>

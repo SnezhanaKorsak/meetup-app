@@ -1,36 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import { getAllMeetups } from 'state/reducers/meetupReducer';
+import { getWeekArr } from 'helpers/index';
+import { useAppDispatch, useAppSelector } from 'hooks/index';
 
 import GroupMeetupsByDate from '../GroupMeetupsByDate';
-import { getWeekArr } from 'helpers';
 
 import { MeetupsContainerProps } from './types';
 
-const data = [
-  {
-    id: '7306dd6b-ccc30f-4417-b27e-45218050bff0',
-    title: 'Web3: From zero to hero',
-    description: 'Women Who Code',
-    time: '2022-10-21T14:00:00.000Z',
-    place: 'Online',
-    user_id: '87564d85-ce27-4d83-ab5e-821334365514',
-  },
-  {
-    id: '7306dd6b-c30f-4417-b27e-45218050bff0',
-    title: 'Node JS',
-    description: 'Project discussion and code review',
-    time: '2022-10-23T14:00:00.000Z',
-    place: 'Online',
-    user_id: '87564d85-ce27-4d83-ab5e-821334365514',
-  },
-];
-
 const MeetupsContainer: React.FC<MeetupsContainerProps> = ({ date }) => {
-  const currentDate = new Date(date || '');
+  const dispatch = useAppDispatch();
+  const meetups = useAppSelector((state) => state.meetups.meetups);
 
+  useEffect(() => {
+    dispatch(getAllMeetups());
+  }, []);
+
+  const currentDate = new Date(date || '');
   const week = getWeekArr(currentDate);
 
   const getGroupMeetupsByDay = (selectedDay: string) =>
-    data.filter((meetup) => meetup.time.split('T')[0] === selectedDay);
+    meetups.filter((meetup) => meetup.time.split('T')[0] === selectedDay);
 
   const mappedItems = week.map((day) => (
     <GroupMeetupsByDate key={day} day={day} meetups={getGroupMeetupsByDay(day)} />
