@@ -26,7 +26,7 @@ export const meetupReducer = meetupSlice.reducer;
 export const { setMeetups } = meetupSlice.actions;
 
 // thunk
-export const getAllMeetups = (filter: string, sortQuery: string) => (dispatch: AppDispatch) => {
+export const getAllMeetups = (filter?: string, sortQuery?: string) => (dispatch: AppDispatch) => {
   meetupService
     .fetchAllMeetups(filter, sortQuery)
     .then((res) => {

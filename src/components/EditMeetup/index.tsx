@@ -20,7 +20,7 @@ const EditMeetup = () => {
 
   useLayoutEffect(() => {
     meetupService.getMeetupById(meetupId).then((res) => {
-      const { id, user_id, ...values } = res.data;
+      const { id, user_id: userId, ...values } = res.data;
       setInitialValues(values);
     });
   }, []);

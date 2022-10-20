@@ -1,20 +1,52 @@
 import React, { useState } from 'react';
 
 import { formatTime } from 'helpers/';
+import { useAppDispatch, useAppSelector } from 'hooks/index';
 import { EDIT_MEETUP } from 'constants/index';
+import { meetupService } from 'api/meetup-api';
+import { getAllMeetups } from 'state/reducers/meetupReducer';
 
-import { Wrapper, Container, Image, Time, Title, Description, Place, HiddenButton } from './styled';
-import { NavLink } from './styled';
+import {
+  Wrapper,
+  Container,
+  Image,
+  Time,
+  Title,
+  Description,
+  Place,
+  HiddenButton,
+  NavLink,
+  DeleteIcon,
+} from './styled';
 import { Meetup } from 'types/meetyps';
 
-const MeetupItem: React.FC<Meetup> = ({ id, title, description, time, place, image }) => {
+import trashIcon from 'assets/images/trash_icon.svg';
+
+const MeetupItem: React.FC<Meetup> = ({
+  id,
+  title,
+  description,
+  time,
+  place,
+  image,
+  user_id: meetupUserId,
+}) => {
+  const dispatch = useAppDispatch();
+  const currentUserId = useAppSelector((state) => state.auth.user.id);
+
   const [hidden, setHidden] = useState(true);
 
   const formattedTime = formatTime(time);
   const linkToEdit = EDIT_MEETUP + `${id}`;
 
+  const isOwner = currentUserId === meetupUserId;
+
   const onMouseEnterHandler = () => setHidden(false);
   const onMouseLeaveHandler = () => setHidden(true);
+
+  const deleteMeetup = () => {
+    meetupService.deleteMeetup(id).then(() => dispatch(getAllMeetups()));
+  };
 
   return (
     <Wrapper onMouseEnter={onMouseEnterHandler} onMouseLeave={onMouseLeaveHandler}>
@@ -27,9 +59,14 @@ const MeetupItem: React.FC<Meetup> = ({ id, title, description, time, place, ima
         <Place>{place}</Place>
       </Container>
 
-      <HiddenButton hidden={hidden}>
-        <NavLink to={linkToEdit}>Edit</NavLink>
-      </HiddenButton>
+      {isOwner && (
+        <HiddenButton hidden={hidden}>
+          <NavLink to={linkToEdit}>Edit</NavLink>
+          <DeleteIcon onClick={deleteMeetup}>
+            <img src={trashIcon} alt='delete' />
+          </DeleteIcon>
+        </HiddenButton>
+      )}
     </Wrapper>
   );
 };

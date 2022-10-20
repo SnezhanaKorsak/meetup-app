@@ -4,7 +4,7 @@ import { Meetup } from 'types/meetyps';
 import { AxiosError } from 'axios';
 
 export const meetupService = {
-  fetchAllMeetups(filter: string, sortQuery: string) {
+  fetchAllMeetups(filter = '', sortQuery = '') {
     return instance.get<Meetup[]>(`api/meetups?${sortQuery}${filter}`);
   },
   getMeetupById(meetupId: string) {
@@ -20,5 +20,8 @@ export const meetupService = {
   },
   updateMeetup(meetupId: string, newMeetup: Omit<Meetup, 'id' | 'user_id'>) {
     return instance.put(`api/meetups/${meetupId}`, { ...newMeetup });
+  },
+  deleteMeetup(meetupId: string) {
+    return instance.delete(`api/meetups/${meetupId}`);
   },
 };

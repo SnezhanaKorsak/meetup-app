@@ -84,3 +84,14 @@ export const NavLink = styled(Link)<{ isActive?: boolean }>`
   font-size: ${({ theme }) => theme.fontSizes[7]}px;
   color: ${({ theme }) => theme.colors.white};
 `;
+
+export const DeleteIcon = styled.button`
+  position: absolute;
+  top: ${({ theme }) => theme.spaces[0]}px;
+  right: ${({ theme }) => theme.spaces[3]}px;
+  border-radius: ${({ theme }) => theme.spaces[1]}px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+`;
