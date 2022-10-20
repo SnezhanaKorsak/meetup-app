@@ -4,10 +4,11 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import Application from './App';
 
-import { store } from './state/store';
+import { persistor, store } from './state/store';
 
 import theme from './theme';
 import GlobalStyles from './globalStyles';
@@ -18,8 +19,10 @@ root.render(
     <ThemeProvider theme={theme}>
       <HashRouter>
         <Provider store={store}>
-          <Application />
-          <GlobalStyles />
+          <PersistGate loading={null} persistor={persistor}>
+            <Application />
+            <GlobalStyles />
+          </PersistGate>
         </Provider>
       </HashRouter>
     </ThemeProvider>
