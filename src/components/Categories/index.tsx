@@ -2,6 +2,7 @@ import React from 'react';
 
 import Filter from 'components/Filter';
 import Sorting from 'components/Sorting';
+import ResetButton from 'common/ResetButton';
 
 import { CategoriesContainer } from './styled';
 import { CategoriesProps } from './types';
@@ -16,6 +17,8 @@ const Categories: React.FC<CategoriesProps> = ({
     <CategoriesContainer>
       <Filter filterType={filterType} setFilterType={setFilterType} />
       <Sorting sortType={sortType} setSortType={setSortType} />
+
+      <ResetButton />
     </CategoriesContainer>
   );
 };
