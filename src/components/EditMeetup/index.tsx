@@ -5,6 +5,8 @@ import { Formik } from 'formik';
 import { meetupService } from 'api/meetup-api';
 import { EDIT_MEETUP, HOME_PAGE_ROUTE } from 'constants/index';
 import { AddMeetupSchema } from 'common/validation';
+import { updateMeetup } from 'state/reducers/meetupReducer';
+import { useAppDispatch } from 'hooks/index';
 
 import { EditForm } from './styled';
 import { ErrorMessage, Label, StyledField, SubmitButton } from '../pages/AddMeetup/styled';
@@ -13,6 +15,7 @@ import { Meetup } from 'types/meetyps';
 type EditFormValues = Omit<Meetup, 'id' | 'user_id'>;
 
 const EditMeetup = () => {
+  const dispatch = useAppDispatch();
   const params = useLocation();
   const meetupId = params.pathname.split(EDIT_MEETUP)[1];
 
@@ -25,8 +28,8 @@ const EditMeetup = () => {
     });
   }, []);
 
-  const onSubmitHandler = async (values: EditFormValues) => {
-    await meetupService.updateMeetup(meetupId, values);
+  const onSubmitHandler = (values: EditFormValues) => {
+    dispatch(updateMeetup(meetupId, values));
   };
 
   if (!initialValues) {

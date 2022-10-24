@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 import { formatTime } from 'helpers/';
 import { useAppDispatch, useAppSelector } from 'hooks/index';
 import { EDIT_MEETUP } from 'constants/index';
-import { meetupService } from 'api/meetup-api';
-import { getAllMeetups } from 'state/reducers/meetupReducer';
+import { deleteMeetupById } from 'state/reducers/meetupReducer';
 
 import {
   Wrapper,
@@ -45,7 +44,7 @@ const MeetupItem: React.FC<Meetup> = ({
   const onMouseLeaveHandler = () => setHidden(true);
 
   const deleteMeetup = () => {
-    meetupService.deleteMeetup(id).then(() => dispatch(getAllMeetups()));
+    dispatch(deleteMeetupById(id));
   };
 
   return (

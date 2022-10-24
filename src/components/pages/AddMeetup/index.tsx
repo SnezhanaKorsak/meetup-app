@@ -8,13 +8,15 @@ import Greeting from 'components/Greeting';
 import { AddMeetupSchema } from 'common/validation';
 import { getDateWithTime } from 'helpers/index';
 import { HOME_PAGE_ROUTE } from 'constants/index';
-import { meetupService } from 'api/meetup-api';
+import { createNewMeetup } from 'state/reducers/meetupReducer';
+import { useAppDispatch } from 'hooks/index';
 
 import { Wrapper } from 'components/layouts';
 import { Container, ErrorMessage, Label, StyledField, SubmitButton } from './styled';
 import { MeetupsFormValues } from './types';
 
 const AddMeetup = () => {
+  const dispatch = useAppDispatch();
   const [date, setDate] = useState<Date | null>(new Date());
 
   const initialValues: MeetupsFormValues = {
@@ -25,9 +27,9 @@ const AddMeetup = () => {
     image: '',
   };
 
-  const onSubmitHandler = async (values: MeetupsFormValues) => {
+  const onSubmitHandler = (values: MeetupsFormValues) => {
     const time = getDateWithTime(values.time, date);
-    await meetupService.createMeetup({ ...values, time });
+    dispatch(createNewMeetup({ ...values, time }));
   };
 
   return (

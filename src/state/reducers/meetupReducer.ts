@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 
 import { AppDispatch } from '../store';
 import { meetupService } from 'api/meetup-api';
-import { setIsLoadingMeetup } from './appReducer';
+import { setIsLoadingMeetup, setIsLoading } from './appReducer';
 
 import { Meetup } from 'types/meetyps';
 
@@ -35,6 +35,44 @@ export const getAllMeetups = (filter?: string, sortQuery?: string) => (dispatch:
     .then((res) => {
       dispatch(setMeetups(res.data));
       dispatch(setIsLoadingMeetup({ value: false }));
+    })
+    .catch((err: AxiosError) => {
+      console.log(err.message);
+    });
+};
+
+export const createNewMeetup =
+  (newMeetup: Omit<Meetup, 'id' | 'user_id'>) => (dispatch: AppDispatch) => {
+    dispatch(setIsLoading({ value: true }));
+
+    meetupService
+      .createMeetup(newMeetup)
+      .then(() => dispatch(setIsLoading({ value: false })))
+      .catch((err: AxiosError) => {
+        console.log(err.message);
+      });
+  };
+
+export const updateMeetup =
+  (meetupId: string, newMeetup: Omit<Meetup, 'id' | 'user_id'>) => (dispatch: AppDispatch) => {
+    dispatch(setIsLoading({ value: true }));
+
+    meetupService
+      .updateMeetup(meetupId, newMeetup)
+      .then(() => dispatch(setIsLoading({ value: false })))
+      .catch((err: AxiosError) => {
+        console.log(err.message);
+      });
+  };
+
+export const deleteMeetupById = (meetupId: string) => (dispatch: AppDispatch) => {
+  dispatch(setIsLoading({ value: true }));
+
+  meetupService
+    .deleteMeetup(meetupId)
+    .then(() => {
+      dispatch(getAllMeetups());
+      dispatch(setIsLoading({ value: false }));
     })
     .catch((err: AxiosError) => {
       console.log(err.message);

@@ -1,8 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppDispatch } from '../store';
-import { User } from 'types/auth';
-import { authService } from '../../api/auth-api';
 import { AxiosError } from 'axios';
+
+import { AppDispatch } from '../store';
+import { authService } from 'api/auth-api';
+import { setIsLoading } from './appReducer';
+
+import { User } from 'types/auth';
 
 const initialState = {
   user: {} as User,
@@ -29,6 +32,8 @@ export const { setUser, setAuth } = authSlice.actions;
 
 // thunk
 export const login = (email: string, password: string) => (dispatch: AppDispatch) => {
+  dispatch(setIsLoading({ value: true }));
+
   authService
     .login(email, password)
     .then((res) => {
@@ -38,11 +43,16 @@ export const login = (email: string, password: string) => (dispatch: AppDispatch
     })
     .catch((err: AxiosError) => {
       console.log(err.message);
+    })
+    .finally(() => {
+      dispatch(setIsLoading({ value: false }));
     });
 };
 
 export const registration =
   (name: string, email: string, password: string, role: string) => (dispatch: AppDispatch) => {
+    dispatch(setIsLoading({ value: true }));
+
     authService
       .registration(name, email, password, role)
       .then((res) => {
@@ -52,6 +62,9 @@ export const registration =
       })
       .catch((err: AxiosError) => {
         console.log(err.message);
+      })
+      .finally(() => {
+        dispatch(setIsLoading({ value: false }));
       });
   };
 
