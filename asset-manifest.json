@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.js": "/meetup-app/static/js/main.82389607.js",
+    "static/js/787.fc721c03.chunk.js": "/meetup-app/static/js/787.fc721c03.chunk.js",
+    "static/media/logo.jpg": "/meetup-app/static/media/logo.be2750bce9aae1dd74d0.jpg",
+    "index.html": "/meetup-app/index.html",
+    "static/media/search.svg": "/meetup-app/static/media/search.da47a55914e18f0fc1e07932dd1e3914.svg",
+    "static/media/trash_icon.svg": "/meetup-app/static/media/trash_icon.c320c87dd3b2e28bd7512b88448a387f.svg",
+    "main.82389607.js.map": "/meetup-app/static/js/main.82389607.js.map",
+    "787.fc721c03.chunk.js.map": "/meetup-app/static/js/787.fc721c03.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.82389607.js"
+  ]
+}
