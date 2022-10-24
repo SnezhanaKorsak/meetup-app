@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 
 import { authReducer } from '../reducers/authReducer';
 import { meetupReducer } from '../reducers/meetupReducer';
+import { appReducer } from '../reducers/appReducer';
 
 const persistConfig = {
   key: 'root',
@@ -12,6 +13,7 @@ const persistConfig = {
 };
 
 export const rootReducer = combineReducers({
+  app: appReducer,
   auth: authReducer,
   meetups: meetupReducer,
 });
