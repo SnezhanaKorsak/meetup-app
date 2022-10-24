@@ -5,7 +5,6 @@ const white = '#ffffff';
 const pink = '#ee1c41';
 const gray = '#757575';
 const lightGray = 'rgba(117,117,117,0.8)';
-
 const error = '#ef0505';
 
 const boxShadows = [
