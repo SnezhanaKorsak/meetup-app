@@ -24,4 +24,7 @@ export const meetupService = {
   deleteMeetup(meetupId: string) {
     return instance.delete(`api/meetups/${meetupId}`);
   },
+  searchMeetup(searchValue = '') {
+    return instance.get<Meetup[]>(`api/meetups?search=${searchValue}`);
+  },
 };

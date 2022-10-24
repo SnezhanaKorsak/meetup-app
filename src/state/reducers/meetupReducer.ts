@@ -78,3 +78,17 @@ export const deleteMeetupById = (meetupId: string) => (dispatch: AppDispatch) =>
       console.log(err.message);
     });
 };
+
+export const searchMeetup = (searchValue: string) => (dispatch: AppDispatch) => {
+  dispatch(setIsLoading({ value: true }));
+
+  meetupService
+    .searchMeetup(searchValue)
+    .then((res) => {
+      dispatch(setMeetups(res.data));
+      dispatch(setIsLoading({ value: false }));
+    })
+    .catch((err: AxiosError) => {
+      console.log(err.message);
+    });
+};

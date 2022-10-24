@@ -10,6 +10,7 @@ import { StyledHeader, StyledLogo } from 'components/Header/styled';
 import { NavLink } from '../Navigation/styled';
 
 import logo from 'assets/images/logo.jpg';
+import SearchField from '../SearchField';
 
 const Header = () => {
   const isAuth = useAppSelector((state) => state.auth.isAuth);
@@ -19,6 +20,9 @@ const Header = () => {
     <>
       <StyledHeader>
         <StyledLogo src={logo} alt='logo' />
+
+        <SearchField />
+
         {isAuth ? <Navigation /> : <NavLink to={LOGIN_ROUTE}>Login</NavLink>}
       </StyledHeader>
 
